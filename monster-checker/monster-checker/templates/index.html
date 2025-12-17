@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Monster Checker</title>
+  <link rel="stylesheet" href="/static/style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar__inner">
+      <div>
+        <div class="brand">Monster Checker</div>
+        <div class="tagline">연구 기록에서 윤리 위험 신호와 소진 신호를 가시화</div>
+      </div>
+      <div class="pill">FRANKENSTEIN → 책임의 데이터화</div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="hero__left">
+        <h1>우리가 방치한 ‘괴물’을 드러내기</h1>
+        <p>
+          논문 초안·실험노트·연구일지 텍스트에서 <b>선택 보고/검증 부족/과장 표현</b> 같은 위험 신호와
+          <b>소진(번아웃)</b> 단서를 찾아 대시보드로 보여준다.
+        </p>
+        <div class="chips">
+          <span class="chip">익명 분석</span>
+          <span class="chip">경향성 경고</span>
+          <span class="chip">구조 문제 가시화</span>
+        </div>
+      </div>
+
+      <div class="hero__right card">
+        <div class="card__title">Monster Index</div>
+        <div class="scoreRow">
+          <div class="score" id="monsterIndex">-</div>
+          <div class="scoreMeta">
+            <div class="level" id="monsterLevel">대기</div>
+            <div class="hint" id="monsterHint">분석 결과가 여기에 표시된다.</div>
+          </div>
+        </div>
+
+        <div class="gauge">
+          <div class="gauge__bar" id="gaugeBar"></div>
+        </div>
+
+        <div class="miniStats">
+          <div class="miniStat">
+            <div class="miniStat__k">문장</div>
+            <div class="miniStat__v" id="statSentences">-</div>
+          </div>
+          <div class="miniStat">
+            <div class="miniStat__k">단어</div>
+            <div class="miniStat__v" id="statWords">-</div>
+          </div>
+          <div class="miniStat">
+            <div class="miniStat__k">검증 단서</div>
+            <div class="miniStat__v" id="statVerify">-</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid2">
+      <section class="card">
+        <div class="card__title">텍스트 입력</div>
+        <div class="card__desc">연구 기록 텍스트를 붙여넣고 분석 버튼을 누르면 된다.</div>
+
+        <textarea id="input" class="textarea" placeholder="예) 12/3 실험 1회 진행… (논문 초안/실험노트/일지 텍스트)"></textarea>
+
+        <div class="actions">
+          <button id="run" class="btn">분석하기</button>
+          <button id="fillSample" class="btn btn--ghost" type="button">샘플 넣기</button>
+        </div>
+
+        <div class="note">
+          ⚠️ 이 도구는 “위반 판정”이 아니라 “위험 신호”를 보여주는 경고 대시보드다.
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="card__title">위험 신호 요약</div>
+        <div class="card__desc">키워드 기반으로 탐지된 신호를 항목별로 표시한다.</div>
+        <div id="flags" class="flags"></div>
+      </section>
+    </section>
+
+    <section class="grid2">
+      <section class="card">
+        <div class="card__title">차트</div>
+        <div class="card__desc">윤리 키워드·소진 키워드·검증 부족 신호를 비교한다.</div>
+        <canvas id="chart" height="170"></canvas>
+      </section>
+
+      <section class="card">
+        <div class="card__title">자주 나온 단어 Top 10</div>
+        <div class="card__desc">텍스트에서 빈도가 높은 단어를 보여준다.</div>
+        <ol id="topWords" class="topWords"></ol>
+      </section>
+    </section>
+
+    <footer class="footer">
+      <div>Monster Checker • school research prototype</div>
+    </footer>
+  </main>
+
+  <script src="/static/main.js"></script>
+</body>
+</html>
